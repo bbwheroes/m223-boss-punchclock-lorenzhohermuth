@@ -9,14 +9,6 @@ pkgs.mkShell {
     systemd
   ];
 
-#  systemd.services.my-docker-compose = {
-#    script = ''
-#      docker compose -f ./.devcontainer/docker-compose.yml up db pgadmin
-#    '';
-#    wantedBy = ["multi-user.target"];
-#    # If you use docker
-#    after = ["docker.service" "docker.socket"];
-#  };
   POSTGRES_PASSWORD = "postgres";
   POSTGRES_USER = "postgres";
   POSTGRES_DB = "postgres";
