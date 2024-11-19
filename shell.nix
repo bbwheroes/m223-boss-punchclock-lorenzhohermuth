@@ -4,8 +4,6 @@ pkgs.mkShell {
     quarkus
     zulu17
     maven
-    systemd
-    systemd
   ];
 
   POSTGRES_PASSWORD = "postgres";
