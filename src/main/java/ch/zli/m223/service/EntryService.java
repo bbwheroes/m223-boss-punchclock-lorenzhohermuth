@@ -26,8 +26,8 @@ public class EntryService {
     return query.getResultList();
   }
 
-  public Entry findEntry(Long id) {
-    return entityManager.find(Entry.class, id);
+    public Entry findEntry(Long id) {
+      return entityManager.find(Entry.class, id);
   }
 
   public void deleteEntry(Long id) {
