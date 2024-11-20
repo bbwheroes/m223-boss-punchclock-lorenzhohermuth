@@ -7,6 +7,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Entry {
@@ -24,6 +25,11 @@ public class Entry {
   @ManyToOne(optional = false)
   @Fetch(FetchMode.JOIN)
   private Category category;
+
+  @ManyToMany
+  @JoinTable(name = "entry_tags", joinColumns = @JoinColumn(name = "entry_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+  @Fetch(FetchMode.JOIN)
+  private Set<Tag> tags;
 
   public Long getId() {
     return id;
