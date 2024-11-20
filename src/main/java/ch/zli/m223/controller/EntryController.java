@@ -3,10 +3,14 @@ package ch.zli.m223.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.resource.NotSupportedException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -38,4 +42,20 @@ public class EntryController {
        return entryService.createEntry(entry);
     }
 
+    @Path("/{id}")
+    @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Deletes an entry.", description = "Deletes an entry by its id.")
+    public void delete(@PathParam("id") Long id) {
+       entryService.deleteEntry(id);
+    }
+
+    @Path("/{id}")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Updates an entry.", description = "Updates an entry by its id.")
+    public Entry update(@PathParam("id") Long id, Entry entry) throws NotSupportedException {
+       return entryService.updateEntry(id, entry);
+    }
 }
