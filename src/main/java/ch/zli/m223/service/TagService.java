@@ -11,12 +11,12 @@ import javax.resource.NotSupportedException;
 import ch.zli.m223.model.Tag;
 
 @ApplicationScoped
-public class TagService {
+public class TagService implements IService<Tag> {
   @Inject
   private EntityManager entityManager;
 
   @Transactional
-  public Tag createTag(Tag tag) {
+  public Tag create(Tag tag) {
     entityManager.persist(tag);
     return tag;
   }
@@ -26,16 +26,16 @@ public class TagService {
     return query.getResultList();
   }
 
-  public Tag findTag(Long id) {
+  public Tag find(Long id) {
     return entityManager.find(Tag.class, id);
   }
 
-  public void deleteTag(Long id) {
-    entityManager.remove(findTag(id));
+  public void delete(Long id) {
+    entityManager.remove(find(id));
   }
 
   @Transactional
-  public Tag updateTag(Long id, Tag tag) throws NotSupportedException {
+  public Tag update(Long id, Tag tag) throws NotSupportedException {
     if (tag.getId() != id) {
       throw new NotSupportedException("Ids do not match");
     }
