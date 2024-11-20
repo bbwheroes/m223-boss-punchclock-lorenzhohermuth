@@ -11,12 +11,12 @@ import javax.resource.NotSupportedException;
 import ch.zli.m223.model.Entry;
 
 @ApplicationScoped
-public class EntryService {
+public class EntryService implements IService<Entry> {
   @Inject
   private EntityManager entityManager;
 
   @Transactional
-  public Entry createEntry(Entry entry) {
+  public Entry create(Entry entry) {
     entityManager.persist(entry);
     return entry;
   }
@@ -26,16 +26,16 @@ public class EntryService {
     return query.getResultList();
   }
 
-    public Entry findEntry(Long id) {
-      return entityManager.find(Entry.class, id);
+  public Entry find(Long id) {
+    return entityManager.find(Entry.class, id);
   }
 
-  public void deleteEntry(Long id) {
-    entityManager.remove(findEntry(id));
+  public void delete(Long id) {
+    entityManager.remove(find(id));
   }
 
   @Transactional
-  public Entry updateEntry(Long id, Entry entry) throws NotSupportedException {
+  public Entry update(Long id, Entry entry) throws NotSupportedException {
     if (entry.getId() != id) {
       throw new NotSupportedException("Ids do not match");
     }

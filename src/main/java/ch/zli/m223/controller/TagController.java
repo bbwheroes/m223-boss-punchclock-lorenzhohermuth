@@ -17,14 +17,14 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import ch.zli.m223.model.Tag;
-import ch.zli.m223.service.TagService;
+import ch.zli.m223.service.IService;
 
 @Path("/tags")
 @org.eclipse.microprofile.openapi.annotations.tags.Tag(name = "Tags", description = "Handling of Tags")
 public class TagController {
 
   @Inject
-  TagService tagService;
+  IService<Tag> tagService;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -38,7 +38,7 @@ public class TagController {
   @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Creates a new entry.", description = "Creates a new entry and returns the newly added entry.")
   public Tag create(Tag entry) {
-    return tagService.createTag(entry);
+    return tagService.create(entry);
   }
 
   @Path("/{id}")
@@ -46,7 +46,7 @@ public class TagController {
   @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Deletes an entry.", description = "Deletes an entry by its id.")
   public void delete(@PathParam("id") Long id) {
-    tagService.deleteTag(id);
+    tagService.delete(id);
   }
 
   @Path("/{id}")
@@ -55,6 +55,6 @@ public class TagController {
   @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Updates an entry.", description = "Updates an entry by its id.")
   public Tag update(@PathParam("id") Long id, Tag entry) throws NotSupportedException {
-    return tagService.updateTag(id, entry);
+    return tagService.update(id, entry);
   }
 }

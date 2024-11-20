@@ -11,12 +11,12 @@ import javax.resource.NotSupportedException;
 import ch.zli.m223.model.Category;
 
 @ApplicationScoped
-public class CategoryService {
+public class CategoryService implements IService<Category> {
   @Inject
   private EntityManager entityManager;
 
   @Transactional
-  public Category createCategory(Category category) {
+  public Category create(Category category) {
     entityManager.persist(category);
     return category;
   }
@@ -26,16 +26,16 @@ public class CategoryService {
     return query.getResultList();
   }
 
-  public Category findCategory(Long id) {
+  public Category find(Long id) {
     return entityManager.find(Category.class, id);
   }
 
-  public void deleteCategory(Long id) {
-    entityManager.remove(findCategory(id));
+  public void delete(Long id) {
+    entityManager.remove(find(id));
   }
 
   @Transactional
-  public Category updateCategory(Long id, Category category) throws NotSupportedException {
+  public Category update(Long id, Category category) throws NotSupportedException {
     if (category.getId() != id) {
       throw new NotSupportedException("Ids do not match");
     }

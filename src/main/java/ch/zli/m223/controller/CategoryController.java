@@ -18,14 +18,14 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import ch.zli.m223.model.Category;
-import ch.zli.m223.service.CategoryService;
+import ch.zli.m223.service.IService;
 
 @Path("/category")
 @Tag(name = "Category", description = "Handling of categorys")
 public class CategoryController {
 
   @Inject
-  CategoryService categoryService;
+  IService<Category> categoryService;
 
   @GET
   @Produces(MediaType.APPLICATION_JSON)
@@ -39,7 +39,7 @@ public class CategoryController {
   @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Creates a new category.", description = "Creates a new category and returns the newly added category.")
   public Category create(Category category) {
-    return categoryService.createCategory(category);
+    return categoryService.create(category);
   }
 
   @Path("/{id}")
@@ -47,7 +47,7 @@ public class CategoryController {
   @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Deletes an category.", description = "Deletes an category by its id.")
   public void delete(@PathParam("id") Long id) {
-    categoryService.deleteCategory(id);
+    categoryService.delete(id);
   }
 
   @Path("/{id}")
@@ -56,6 +56,6 @@ public class CategoryController {
   @Consumes(MediaType.APPLICATION_JSON)
   @Operation(summary = "Updates an category.", description = "Updates an category by its id.")
   public Category update(@PathParam("id") Long id, Category category) throws NotSupportedException {
-    return categoryService.updateCategory(id, category);
+    return categoryService.update(id, category);
   }
 }
