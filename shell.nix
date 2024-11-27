@@ -4,6 +4,7 @@ pkgs.mkShell {
     quarkus
     zulu17
     maven
+    openssl
   ];
 
   POSTGRES_PASSWORD = "postgres";
